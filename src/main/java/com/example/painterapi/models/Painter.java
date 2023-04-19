@@ -3,7 +3,6 @@ package com.example.painterapi.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "painters")
 public class Painter {
 
     @Id
@@ -11,8 +10,9 @@ public class Painter {
     private int painter_id;
     private String name;
     private String nationality;
-    private int birth_year;
-    private int death_year;
+
+    private String birth_date;
+    private String death_date;
     private String style;
     private String image_url;
     private String description;
@@ -42,20 +42,20 @@ public class Painter {
         this.nationality = nationality;
     }
 
-    public int getBirth_year() {
-        return birth_year;
+    public String getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirth_year(int birth_year) {
-        this.birth_year = birth_year;
+    public void setBirth_date(String birth_date) {
+        this.birth_date = birth_date;
     }
 
-    public int getDeath_year() {
-        return death_year;
+    public String getDeath_date() {
+        return death_date;
     }
 
-    public void setDeath_year(int death_year) {
-        this.death_year = death_year;
+    public void setDeath_date(String death_date) {
+        this.death_date = death_date;
     }
 
     public String getStyle() {
@@ -81,4 +81,5 @@ public class Painter {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
