@@ -1,5 +1,15 @@
 package com.example.painterapi.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Entity
@@ -12,8 +22,10 @@ public class Painting {
     private int year;
     private String description;
     private String image_url;
+
     @ManyToOne
     @JoinColumn(name = "painter_id")
+    @JsonIgnoreProperties("paintings")
     private Painter painter;
 
     public int getPainting_id() {

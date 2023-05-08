@@ -1,6 +1,12 @@
 package com.example.painterapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Painter {
@@ -17,6 +23,9 @@ public class Painter {
     private String image_url;
     private String description;
 
+    @OneToMany(mappedBy = "painter", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Painting> paintings = new ArrayList<>();
 
     public int getPainter_id() {
         return painter_id;
@@ -80,6 +89,17 @@ public class Painter {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    @JsonIgnoreProperties("painter")
+    public List<Painting> getPaintings() {
+        return paintings;
+    }
+
+    @JsonBackReference
+    public void setPaintings(List<Painting> paintings) {
+        this.paintings = paintings;
     }
 
 }
