@@ -1,9 +1,8 @@
 package com.example.painterapi.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ public class Painter {
     private String description;
 
     @OneToMany(mappedBy = "painter", cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Painting> paintings = new ArrayList<>();
 
     public int getPainter_id() {
@@ -101,5 +99,4 @@ public class Painter {
     public void setPaintings(List<Painting> paintings) {
         this.paintings = paintings;
     }
-
 }

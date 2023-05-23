@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 
 @Entity
+@CrossOrigin("http://localhost:4200")
 public class Painting {
 
     @Id

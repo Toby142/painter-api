@@ -11,6 +11,7 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -61,7 +62,7 @@ public class PainterController {
     public ResponseEntity<Object> uploadImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
         try {
             String fileName = "painter_" + id + ".png";
-            Path path = Paths.get("src/main/resources/images/" + fileName);
+            Path path = Paths.get("../images/" + fileName);
 
             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -81,6 +82,7 @@ public class PainterController {
         }
     }
 
+
     @GetMapping(value = "/painter/{id}/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public void getImage(@PathVariable("id") int id, HttpServletResponse response) throws IOException {
         Painter painter = painterService.getPainterById(id);
@@ -90,15 +92,10 @@ public class PainterController {
         }
 
         String fileName = "painter_" + painter.getPainter_id() + ".png";
-        InputStream inputStream = getClass().getResourceAsStream("/images/" + fileName);
-        if (inputStream == null) {
-            response.setStatus(HttpStatus.NOT_FOUND.value());
-            return;
-        }
+        InputStream inputStream = new FileInputStream("../images/" + fileName);
 
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(inputStream, response.getOutputStream());
         response.flushBuffer();
     }
-
 }
